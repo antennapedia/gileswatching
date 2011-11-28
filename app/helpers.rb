@@ -8,14 +8,16 @@ def fetchFencepost(feedurl)
 
 	if feedurl
 		begin
-			feed = Feedzirra::Feed.fetch_and_parse(feedurl)
-			fencepost = feed.entries.first.published
-			#logger.info(fencepost)
+			feed = Feedzirra::Feed.fetch_and_parse(feedurl,
+				:on_success => lambda {|url, feed| fencepost = feed.entries.first.published },
+				:on_failure => lambda {|url, response_code, response_header, response_body| puts "feedzirra failure: #{response_code} #{response_body}" }
+			)
 		rescue
-			logger.error 'feed fetch failed, falling back'
+			puts 'exception caught; falling back to fencepost 7 days back'
 		end
 	end
 
+	puts "Fencepost: #{fencepost}"
 	if fencepost.kind_of?(''.class)
 		Time.parse(fencepost)
 	else
