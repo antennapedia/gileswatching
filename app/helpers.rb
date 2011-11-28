@@ -10,6 +10,7 @@ def fetchFencepost(feedurl)
 		begin
 			feed = Feedzirra::Feed.fetch_and_parse(feedurl)
 			fencepost = feed.entries.first.published
+			#logger.info(fencepost)
 		rescue
 			logger.error 'feed fetch failed, falling back'
 		end

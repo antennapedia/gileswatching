@@ -1,9 +1,8 @@
-config.yml
-development.db
-Gemfile.lock
-input
-site
-json
-test.rb
+vendor
+.sass-cache
 .DS_Store
+ChangeLog
+Gemfile.lock
+tmp
+config/config.yml
 .bundle

@@ -20,6 +20,7 @@ end
 # Add here your after load hooks
 #
 Padrino.after_load do
+	Gileswatching.readConfiguration
 end
 
 Padrino.load!
