@@ -1,0 +1,53 @@
+%div.span-24
+	%br
+	%h2
+		Giles through #{@today}.
+%div.span-8
+	%p
+		Auto-generating the next post for
+		%a{:href => 'http://community.livejournal.com/giles_watchers/'} Giles Watchers.
+	%p
+		Bookmarks are coming from
+		%br
+		%a{ :href => @endpoint }= @endpoint
+		%br
+		- if @postcount == 1
+			1 item found.
+		- else
+			#{@postcount} items found.
+		%br
+		The last newsletter was posted #{@lastNewsletter}.
+	%p
+		%a{:href => 'help'} How to bookmark.
+%div{ :class => "span-16 last" }
+	%h3 Preview
+	%div{:style => "padding: 15px; border: 1px dotted gray;" }
+		- lastcat = nil
+		- if @posts.size == 0
+			%i No posts were spotted. Time to bookmark new ones!
+		- @posts.each do |p|
+			- if lastcat != p.category
+				- if lastcat
+					%br
+				%b
+					%u= p.category.ljtag
+				%br
+				- lastcat = p.category
+			#{p.entry(false)}
+			%br
+%div.span-24
+	%br
+		%h3 Source for the next newsletter
+	%textarea#post{ :rows => 25, :cols => 100, :class => "light" }
+		- buffer = ''
+		- lastcat = nil
+		- @posts.each do |p|
+			- if lastcat != p.category
+				- if lastcat
+					- buffer += "\n"
+				- buffer += "<b><u>#{p.category.ljtag}</u></b>\n"
+				- lastcat = p.category
+			- buffer += p.entry(true) + "\n"
+		- buffer.gsub!(/ +/, ' ')
+		:preserve
+			#{buffer}

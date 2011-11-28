@@ -1,0 +1,9 @@
+config.yml
+development.db
+Gemfile.lock
+input
+site
+json
+test.rb
+.DS_Store
+.bundle
