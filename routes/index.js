@@ -1,6 +1,7 @@
 var
-	helpers = require('helpers'),
-	moment  = require('moment')
+	moment     = require('moment'),
+	helpers    = require('../lib/helpers'),
+	newsletter = require('../lib/newsletter')
 	;
 
 exports.index = function(request, response)
@@ -9,22 +10,38 @@ exports.index = function(request, response)
 	var fencepost, posts;
 	locals =
 	{
-		endpoint: 'http://pinboard.in/u:' + config.pinboard.account;
-		today: new Date(), // format with moment
+		endpoint: 'http://pinboard.in/u:' + config.pinboard.account,
+		today: moment().format('LL'), // format with moment
 	};
 
-	// 	Newsletter::Category.setup(Gileswatching.categories[:setup][:titles], Gileswatching.categories[:setup][:order])
-	helpers.fetchFencepost(confg.newsletter)
+	helpers.fetchFencepost(config.newsletter)
 	.then(function(ts)
 	{
 		fencepost = ts;
-		locals.lastNewsletter = fencepost; // TODO format with moment
+		locals.lastNewsletter = moment(fencepost).calendar();
+
 		return helpers.fetchRecentPosts(config.pinboard, fencepost);
 	})
 	.then(function(result)
 	{
-		posts = result;
-		locals.postcount = posts.length;
+		locals.posts = result;
+		locals.postcount = locals.posts.length;
+		locals.buffer = '';
+
+		var lastcat = null;
+		for (var i = 0; i < locals.posts.length; i++)
+		{
+			var p = locals.posts[i];
+			if (lastcat !== p.category)
+			{
+				if (lastcat)
+					locals.buffer += '\n';
+				locals.buffer += '<b><u>' + p.category.ljtag() + '</u></b>';
+				lastcat = p.category;
+			}
+			locals.buffer += p.entry(true) + '\n';
+		}
+
 		response.render('index', locals);
 	},
 	function(error)

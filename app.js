@@ -3,7 +3,8 @@ var
 	http       = require('http'),
 	multiparty = require('connect-multiparty'),
 	path       = require('path'),
-	routes     = require('./routes')
+	routes     = require('./routes'),
+	newsletter = require('./lib/newsletter')
 	;
 
 var app = express();
@@ -17,6 +18,7 @@ if (!config.pinboard.token)
 	throw new Error('cannot operate without a pinboard api token in env var PINBOARD_TOKEN');
 
 app.set('config', config);
+newsletter.Category.setup(config.categories.titles, config.categories.order);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
