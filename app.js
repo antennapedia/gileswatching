@@ -8,8 +8,14 @@ var
 
 var app = express();
 
-
 var config = require('./config.json');
+
+if (!config.pinboard.token)
+	config.pinboard.token = process.env.PINBOARD_TOKEN;
+
+if (!config.pinboard.token)
+	throw new Error('cannot operate without a pinboard api token in env var PINBOARD_TOKEN');
+
 app.set('config', config);
 
 // all environments
