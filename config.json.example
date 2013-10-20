@@ -1,0 +1,22 @@
+{
+    "pinboard":
+    {
+        "account": "your_account",
+        "token":   "your-api-token"
+    },
+    "newsletter": "http://community.livejournal.com/giles_watchers/data/atom",
+    "categories":
+    {
+        "order:" ["fiction", "ficlets", "art", "prompts", "misc", "rpgs", "sog"],
+        "titles"
+        {
+            "fiction": "Fiction",
+            "ficlets": "Drabbles &amp; Ficlets",
+            "art": "Fan Art",
+            "misc": "Misc",
+            "rpgs": "RPGs",
+            "sog": "Summer of Giles",
+            "prompts": "Prompts &amp; Contests"
+        }
+    }
+}

@@ -6,3 +6,5 @@ Gemfile.lock
 tmp
 config/config.yml
 .bundle
+node_modules
+config.json
