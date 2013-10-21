@@ -1,7 +1,0 @@
---- 
-:mock: none
-:test: none
-:orm: none
-:stylesheet: sass
-:script: none
-:renderer: haml
