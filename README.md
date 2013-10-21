@@ -1,6 +1,6 @@
 # Giles-Watching
 
-A simple express.js web application for auto-generating a Livejournal newsletter from bookmarks stored in a Pinboard account.
+A simple [express.js](http://expressjs.com/) web application for auto-generating a Livejournal newsletter from bookmarks stored in a Pinboard account.
 
 ## Configuration
 
@@ -14,18 +14,17 @@ The `categories` object contains a list of headers used by the newsletters and t
 
 ## Deploying locally
 
-Make sure you have [node.js](http://nodejs.org/) installed. Run `npm install` to install dependencies as usual, then run npm start.
+Make sure you have [node.js](http://nodejs.org/) installed. Run `npm install` to install package dependencies as usual, then run npm start.
 
 ## Deploying on Heroku
 
-Follow the [usual Heroku instructions](https://devcenter.heroku.com/articles/getting-started-with-nodejs) for creating & deploying a node application. This app does not require any data storage or any Heroku addons of any kind.
+Follow the [usual Heroku instructions](https://devcenter.heroku.com/articles/getting-started-with-nodejs) for creating & deploying a node application. This app does not require any data storage or any Heroku addons of any kind. You will want to commit your `config.json` file to the repo before you deploy.
 
-You must configure two environment variables:
+You must configure the environment variable for your Pinboard API token:
 
-`PINBOARD_TOKEN`: your pinboard [API](https://pinboard.in/api/) token  
-`PORT`: the port the app should listen on
+`heroku config:set PINBOARD_TOKEN=username:1234567890abcdef`
 
-Set these environment variables the usual way: `heroku config:set PORT=80`.
+Your app should now be running.
 
 ## License
 
