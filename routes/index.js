@@ -1,5 +1,5 @@
 var
-	moment     = require('moment'),
+	strftime   = require('prettydate').strftime,
 	helpers    = require('../lib/helpers'),
 	newsletter = require('../lib/newsletter')
 	;
@@ -11,14 +11,14 @@ exports.index = function(request, response)
 	locals =
 	{
 		endpoint: 'http://pinboard.in/u:' + config.pinboard.account,
-		today: moment().format('LL'), // format with moment
+		today:    strftime(new Date(), '%A, %B %e'),
 	};
 
 	helpers.fetchFencepost(config.newsletter)
 	.then(function(ts)
 	{
 		fencepost = ts;
-		locals.lastNewsletter = moment(fencepost).calendar();
+		locals.lastNewsletter = strftime(fencepost, '%Y-%m-%d %I:%M %Z');
 
 		return helpers.fetchRecentPosts(config.pinboard, fencepost);
 	})
