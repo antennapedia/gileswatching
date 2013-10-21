@@ -2,7 +2,6 @@
     "pinboard":
     {
         "account": "your_account",
-        "token":   "your-api-token"
     },
     "newsletter": "http://community.livejournal.com/giles_watchers/data/atom",
     "categories":
