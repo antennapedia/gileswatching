@@ -8,6 +8,7 @@ var
 	;
 
 var app = express();
+app.locals.pretty = true;
 
 var config = require('./config.json');
 
