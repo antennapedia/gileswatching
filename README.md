@@ -22,7 +22,7 @@ Follow the [usual Heroku instructions](https://devcenter.heroku.com/articles/get
 
 You must configure two environment variables:
 
-`PINBOARD_TOKEN`: your pinboard [API](https://pinboard.in/api/) token
+`PINBOARD_TOKEN`: your pinboard [API](https://pinboard.in/api/) token  
 `PORT`: the port the app should listen on
 
 Set these environment variables the usual way: `heroku config:set PORT=80`.
