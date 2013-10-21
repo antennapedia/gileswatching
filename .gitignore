@@ -1,8 +1,2 @@
-vendor
-.sass-cache
 .DS_Store
-ChangeLog
-Gemfile.lock
-tmp
-config/config.yml
-.bundle
+node_modules

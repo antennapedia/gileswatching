@@ -1,0 +1,40 @@
+extends layout
+
+block content
+	.span-24
+		br
+		h2 Giles through #{today}.
+	.span-8
+		p Auto-generating the next post for 
+			a(href='http://community.livejournal.com/giles_watchers/') Giles Watchers.
+		p Bookmarks are coming from
+			br
+			a(href="#{endpoint")= endpoint
+			br
+			- if (postcount === 1)
+				| 1 item found.
+			- else
+				| #{postcount} items found.
+			br
+			| The last newsletter was posted #{lastNewsletter}.
+		p: a(href="/help") How to bookmark.
+	.span-16.last
+		h3 Preview
+		div(style="padding: 15px; border: 1px dotted gray;")
+			- lastcat = null
+			- if (posts.length === 0)
+				i No posts were spotted. Time to bookmark new ones!
+			- each p in posts
+				- if (lastcat !== p.category)
+					- if (lastcat)
+						br
+					b: u= p.category.ljtag()
+					br
+					- lastcat = p.category
+				!= p.entry(false)
+				br
+	.span-24
+		br
+		h3 Source for the next newsletter
+		textarea#post.light(rows=25, cols=100)
+			= buffer
