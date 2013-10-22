@@ -28,7 +28,7 @@ block content
 				- if (lastcat !== p.category)
 					- if (lastcat)
 						br
-					b: u= p.category.ljtag()
+					b: u!= p.category.ljtag()
 					br
 					- lastcat = p.category
 				!= p.entry(false)
